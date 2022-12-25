@@ -1,17 +1,33 @@
 /* eslint-disable prettier/prettier */
-import {auth, firebase} from '../../firebase';
-import {createUserWithEmailAndPassword} from 'firebase/auth';
 
-const handleSignup = async(email, password) => {
+import {auth, db} from '../../firebase';
+
+const handleSignup = async details => {
   try {
-    console.log(email, password);
-    const result = await createUserWithEmailAndPassword(auth, email, password);
-    console.log('result', result);
-    return result;
+    const {email, password, name, mobile} = details;
+    const result = await auth.createUserWithEmailAndPassword(email, password);
+    await db.collection('users').doc(result.user.email).set({
+      user_id: result.user.uid,
+      username: name,
+      email: email,
+      phone: mobile,
+    });
+    return {status: 200, result};
   } catch (error) {
-    console.log('error', error.message);
+    console.log('error while sign up', error.message);
     return error.message;
   }
 };
 
-export {handleSignup};
+const handleSignin = async details => {
+  try {
+    const {email, password} = details;
+    const result = await auth.signInWithEmailAndPassword(email, password);
+    return {status: 200, result};
+  } catch (error) {
+    console.log('error while sign in', error);
+    return {status: 400, error};
+  }
+};
+
+export {handleSignup, handleSignin};

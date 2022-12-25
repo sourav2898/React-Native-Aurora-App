@@ -1,9 +1,6 @@
-/* eslint-disable prettier/prettier */
-import * as firebase from 'firebase/app';
-import 'firebase/auth';
-import {getAuth} from 'firebase/auth';
-import 'firebase/firestore';
-import {getFirestore} from 'firebase/firestore';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCS4jOimrw3IsfcZ28QTAg8LBQGvzL43Ug',
@@ -15,8 +12,11 @@ const firebaseConfig = {
   measurementId: 'G-MKTSKY4K4Q',
 };
 
-const app = firebase.initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore();
+firebase.initializeApp(firebaseConfig);
+firebase
+  .firestore()
+  .settings({experimentalForceLongPolling: true, merge: true});
+const db = firebase.firestore();
+const auth = firebase.auth();
 
-export {firebase, auth, db};
+export {db, auth};

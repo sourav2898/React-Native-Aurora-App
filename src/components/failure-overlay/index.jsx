@@ -10,7 +10,7 @@ const FailureOverlay = ({failureText, visible, setVisible}) => {
   return (
     <View>
       <Overlay isVisible={visible} onBackdropPress={toggleOverlay}>
-        <Text style={styles.textPrimary}> Some thing wenr wrong! </Text>
+        <Text style={styles.textPrimary}> Some thing went wrong! </Text>
         <Text style={styles.textSecondary}>{failureText}</Text>
         <Button title="Okay" onPress={toggleOverlay} />
       </Overlay>
@@ -28,10 +28,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     textAlign: 'center',
     fontSize: 20,
+    color: '#111',
   },
   textSecondary: {
     marginBottom: 10,
     textAlign: 'center',
+    color: '#111',
     fontSize: 17,
   },
 });

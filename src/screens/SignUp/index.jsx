@@ -8,7 +8,6 @@ import {
   View,
 } from 'react-native';
 import * as Yup from 'yup';
-import {firebase} from '../../../firebase';
 import {handleSignup} from '../../backend';
 import FailureOverlay from '../../components/failure-overlay';
 import Loading from '../../components/loading';
@@ -45,18 +44,19 @@ const SignUp = ({navigation}) => {
           <Text style={styles.bottomText}> Create {'\n'} Account </Text>
           <Formik
             initialValues={{
-              email: 'sourav.kumar@gmail.com',
-              password: 'sourav',
-              cnf_password: 'sourav',
-              name: 'sourav',
-              mobile: '7992401159',
+              email: '',
+              password: '',
+              cnf_password: '',
+              name: '',
+              mobile: '',
             }}
             validationSchema={SignUpSchema}
             onSubmit={async values => {
               setLoading(true);
-              const res = await handleSignup(values.email, values.password);
 
-              if (res?._tokenResponse) {
+              const res = await handleSignup(values);
+
+              if (res?.status === 200) {
                 setLoading(false);
                 setVisible(true);
                 setShowOverlay('success');
@@ -64,10 +64,16 @@ const SignUp = ({navigation}) => {
                 setLoading(false);
                 setVisible(true);
                 setShowOverlay('failure');
-                if (res === 'Firebase: Error (auth/email-already-in-use).') {
-                  console.log(res);
+                if (
+                  res ===
+                  'Firebase: The email address is already in use by another account. (auth/email-already-in-use).'
+                ) {
                   setShowMessage(
-                    'email already in use, please choose another email.',
+                    'The email address is already in use by another account.Please choose another email for sign up.',
+                  );
+                } else {
+                  setShowMessage(
+                    'Sorry we are facing some issues while creating your account. Please try again later!',
                   );
                 }
               }
@@ -177,6 +183,8 @@ const SignUp = ({navigation}) => {
       </View>
       {showOverlay === 'success' ? (
         <SuccessOverlay
+          navigation={navigation}
+          redirect="SignIn"
           visible={visible}
           setVisible={setVisible}
           successText="Your Account has been created successfully. Please go ahead and login."
@@ -235,7 +243,6 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     marginTop: 20,
-    placeholderTextColor: '#ffffff',
   },
   errorTextInput: {
     borderWidth: 1,
@@ -246,7 +253,6 @@ const styles = StyleSheet.create({
     color: 'white',
     padding: 10,
     marginTop: 20,
-    placeholderTextColor: '#ffffff',
   },
   button: {
     borderColor: 'black',

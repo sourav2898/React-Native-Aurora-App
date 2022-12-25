@@ -10,6 +10,9 @@ import {
 import constants from '../../utils/constants';
 import * as Yup from 'yup';
 import {Formik} from 'formik';
+import {handleSignin} from '../../backend';
+import FailureOverlay from '../../components/failure-overlay';
+import Loading from '../../components/loading';
 
 const SignInSchema = Yup.object().shape({
   password: Yup.string()
@@ -20,6 +23,10 @@ const SignInSchema = Yup.object().shape({
 });
 
 const SignIn = ({navigation}) => {
+  const [showOverlay, setShowOverlay] = useState('');
+  const [showMessage, setShowMessage] = useState('');
+  const [visible, setVisible] = useState(true);
+  const [loading, setLoading] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.top}>
@@ -28,10 +35,21 @@ const SignIn = ({navigation}) => {
       <View style={styles.bottom}>
         <Text style={styles.bottomText}> Weclome {'\n'} Back </Text>
         <Formik
-          initialValues={{email: '', password: ''}}
+          initialValues={{email: 'soura.kumar@gmail.com', password: 'sourav'}}
           validationSchema={SignInSchema}
-          onSubmit={values => {
-            console.log(values);
+          onSubmit={async values => {
+            setLoading(true);
+            const res = await handleSignin(values);
+
+            if (res.status === 200) {
+              setLoading(false);
+            } else {
+              setLoading(false);
+              setShowOverlay('failure');
+              setShowMessage(
+                'There was some error in loging you in. Please try later.',
+              );
+            }
           }}>
           {({
             handleChange,
@@ -91,6 +109,15 @@ const SignIn = ({navigation}) => {
           <Text style={{color: 'white', fontWeight: 'bold'}}>Sign Up</Text>
         </Text>
       </View>
+      {showOverlay === 'failure' ? (
+        <FailureOverlay
+          visible={visible}
+          setVisible={setVisible}
+          failureText={showMessage}
+        />
+      ) : loading ? (
+        <Loading />
+      ) : null}
     </View>
   );
 };

@@ -31,10 +31,12 @@ const handleSignin = async details => {
   }
 };
 
-const getTheBobBurgers = async() => {
-    const res = await axios.get('https://bobsburgers-api.herokuapp.com/characters/');
+const getTheBobBurgers = async () => {
+  const res = await axios.get(
+    'https://bobsburgers-api.herokuapp.com/characters',
+  );
 
-    return res;
-}
+  return res;
+};
 
 export {handleSignup, handleSignin, getTheBobBurgers};

@@ -8,18 +8,35 @@ import {
   View,
 } from 'react-native';
 import BobUsers from '../../components/bob-users';
+import Loading from '../../components/loading';
 import useBobsBurger from '../../hooks/useBobsBurger';
 
 const Home = ({navigation}) => {
+  const {loading, theBobsBurgers} = useBobsBurger();
 
-  const {loading, theBobsBurgers} = useBobsBurger()
-
-  console.log(theBobsBurgers);
-  console.log(loading);
   return (
     <>
       <ScrollView>
-        <BobUsers />
+        {loading ? (
+          <View>
+            <Loading />
+          </View>
+        ) : (
+          <>
+            {theBobsBurgers?.data?.map(data => {
+              return (
+                <BobUsers
+                  key={data.id}
+                  name={data.name}
+                  occupation={data.occupation}
+                  firstEpisode={data.firstEpisode}
+                  url={data.image}
+                  gender={data.gender === 'Female'}
+                />
+              );
+            })}
+          </>
+        )}
       </ScrollView>
     </>
   );

@@ -1,21 +1,27 @@
 import React from 'react';
 import {StyleSheet, View, Image, Text} from 'react-native';
 
-const BobUsers = ({name, occupation, firstEpisode}) => {
+const BobUsers = ({name, occupation, firstEpisode, url, gender}) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        borderColor: `${gender ? 'pink' : 'blue'}`,
+      }}>
       <View style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{
-            uri: 'https://bobsburgers-api.herokuapp.com/images/characters/1.jpg',
+            uri: url,
           }}
         />
       </View>
-      <Text style={styles.textHeading} > Name: {name} </Text>
-      <Text style={styles.textDesc} > Occupation: {occupation} </Text>
-      <Text style={styles.textDesc} > First Episode: {firstEpisode} </Text>
-
+      <Text style={styles.textHeading}> Name: {name || 'Anonymous'} </Text>
+      <Text style={styles.textDesc}> Occupation: {occupation || 'N/A'} </Text>
+      <Text style={styles.textDesc}>
+        {' '}
+        First Episode: {firstEpisode || 'N/A'}{' '}
+      </Text>
     </View>
   );
 };
@@ -26,9 +32,9 @@ const styles = StyleSheet.create({
   container: {
     borderWidth: 2,
     borderRadius: 10,
-    height: 250,
+    height: 'auto',
     margin: 10,
-    padding: 5
+    padding: 5,
   },
   imageContainer: {
     justifyContent: 'center',
@@ -43,10 +49,10 @@ const styles = StyleSheet.create({
     padding: 2,
     color: '#111',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
-  textDesc:{
-    color: "#111",
-    padding: 2
-  }
+  textDesc: {
+    color: '#111',
+    padding: 2,
+  },
 });

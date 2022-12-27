@@ -6,19 +6,20 @@ const useBobsBurger = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    const bobsBurger = async () => {
+      setLoading(true);
+      try {
+        const bobsBurger = await getTheBobBurgers();
+        setBobsBurger(bobsBurger || []);
+        setLoading(false);
+      } catch (error) {
+        console.log('While fetching bobs burgers');
+        setLoading(false);
+      }
+    };
+
     bobsBurger();
   }, []);
-
-  const bobsBurger = async () => {
-    setLoading(true);
-    try {
-      const bobsBurget = await getTheBobBurgers();
-      setBobsBurger(bobsBurget || []);
-    } catch (error) {
-      console.log('While fetching bobs burgers');
-    }
-    setLoading(false);
-  };
 
   return {loading, theBobsBurgers};
 };

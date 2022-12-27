@@ -60,18 +60,6 @@ const App = () => {
       ) : (
         <Tab.Navigator
           screenOptions={({route}) => ({
-            tabBarIcon: ({focused, color, size}) => {
-              let iconName;
-
-              if (route.name === 'Home') {
-                iconName = focused ? 'home' : 'home-outline';
-              } else if (route.name === 'Settings') {
-                iconName = focused ? 'settings' : 'settings-outline';
-              }
-
-              // You can return any component that you like here!
-              return <Ionicons name={iconName} size={size} color={color} />;
-            },
             tabBarActiveTintColor: '#2FBBF0',
             tabBarInactiveTintColor: '#7A8FA6',
           })}>

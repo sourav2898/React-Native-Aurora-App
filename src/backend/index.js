@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 
+import axios from 'axios';
 import {auth, db} from '../../firebase';
 
 const handleSignup = async details => {
@@ -30,4 +31,10 @@ const handleSignin = async details => {
   }
 };
 
-export {handleSignup, handleSignin};
+const getTheBobBurgers = async() => {
+    const res = await axios.get('https://bobsburgers-api.herokuapp.com/characters/');
+
+    return res;
+}
+
+export {handleSignup, handleSignin, getTheBobBurgers};

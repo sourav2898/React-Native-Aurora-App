@@ -1,18 +1,26 @@
 import React, {useState} from 'react';
 import {
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
+import BobUsers from '../../components/bob-users';
+import useBobsBurger from '../../hooks/useBobsBurger';
 
 const Home = ({navigation}) => {
+
+  const {loading, theBobsBurgers} = useBobsBurger()
+
+  console.log(theBobsBurgers);
+  console.log(loading);
   return (
     <>
-      <View style={styles.container}>
-        <Text> Hello </Text>
-      </View>
+      <ScrollView>
+        <BobUsers />
+      </ScrollView>
     </>
   );
 };
@@ -23,7 +31,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    backgroundColor: '#111',
   },
 });
 export default Home;

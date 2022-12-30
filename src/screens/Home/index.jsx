@@ -19,7 +19,10 @@ const Home = ({navigation}) => {
       <ScrollView>
         {loading ? (
           <View>
-            <Loading />
+            <Text style={{fontSize: 30, color: 'black'}}>
+              {' '}
+              Loading content...{' '}
+            </Text>
           </View>
         ) : (
           <>

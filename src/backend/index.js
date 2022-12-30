@@ -42,12 +42,7 @@ const getTheBobBurgers = async () => {
 
 const getCurrentUser = async () => {
   const userEmail = await auth.currentUser?.email;
-  console.log(userEmail.toLowerCase());
-  const colRef = collection(db, 'users');
-  const snapshots = await getDoc(colRef);
-
-  const docs = snapshots.docs.map(doc => doc.data());
-  console.log(docs);
+  return userEmail;
 };
 
 export {handleSignup, handleSignin, getTheBobBurgers, getCurrentUser};

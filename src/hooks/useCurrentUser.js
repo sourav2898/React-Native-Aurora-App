@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {getCurrentUser} from '../backend';
 
 const useCurrentUser = () => {
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {

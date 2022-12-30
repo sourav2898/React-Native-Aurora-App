@@ -13,13 +13,6 @@ const Apparel = ({navigation}) => {
     <>
       <View style={styles.container}>
         <Text> Apparel </Text>
-        <Image
-          source={require('../../assets/images/home-active.png')}
-          style={{
-            width: 10,
-            height: 10,
-          }}
-        />
       </View>
     </>
   );

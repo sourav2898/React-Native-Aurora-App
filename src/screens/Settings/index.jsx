@@ -17,8 +17,10 @@ const Settings = ({navigation}) => {
   return (
     <>
       <View style={styles.container}>
-        <ProfileNavbar />
-        <Text> Profile </Text>
+        <Text style={{color: 'black', fontSize: 25, padding: 10}}>
+          {' '}
+          {currentUser}{' '}
+        </Text>
         <Button onPress={() => auth.signOut()} title="Log out" />
       </View>
     </>
@@ -28,6 +30,8 @@ const Settings = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
     height: '100%',
   },
 });

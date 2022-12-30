@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import useRandomQuotes from '../../hooks/useRandomQuotes';
 
 const Notifications = ({navigation}) => {
+  const {quote} = useRandomQuotes();
   return (
     <>
       <View style={styles.container}>
-        <Text> Notifications </Text>
+        <Text style={styles.text}> {quote} </Text>
       </View>
     </>
   );
@@ -23,7 +25,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: '100%',
-    backgroundColor: '#111',
+    backgroundColor: '#fff',
+  },
+  text: {
+    color: '#111',
+    fontSize: 15,
+    textAlign: 'center',
   },
 });
 export default Notifications;

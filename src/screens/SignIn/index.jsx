@@ -35,7 +35,7 @@ const SignIn = ({navigation}) => {
       <View style={styles.bottom}>
         <Text style={styles.bottomText}> Weclome {'\n'} Back </Text>
         <Formik
-          initialValues={{email: 'soura.kumar@gmail.com', password: 'sourav'}}
+          initialValues={{email: 'sourav.kumar@gmail.com', password: 'sourav'}}
           validationSchema={SignInSchema}
           onSubmit={async values => {
             setLoading(true);

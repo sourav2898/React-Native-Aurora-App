@@ -7,6 +7,7 @@ import {
   Text,
   useColorScheme,
   View,
+  Image,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {NavigationContainer} from '@react-navigation/native';
@@ -62,26 +63,94 @@ const App = () => {
           screenOptions={({route}) => ({
             tabBarActiveTintColor: '#2FBBF0',
             tabBarInactiveTintColor: '#7A8FA6',
+            tabBarStyle: {
+              backgroundColor: 'white',
+              borderTopWidth: 0,
+            },
           })}>
           <Tab.Screen
             name="Home"
             component={Home}
-            options={{headerShown: false}}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Home',
+              tabBarIcon: ({focused, color, size}) => (
+                <Image
+                  source={
+                    focused
+                      ? require('./src/assets/images/home-active.png')
+                      : require('./src/assets/images/home-not-active.png')
+                  }
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              ),
+            }}
           />
           <Tab.Screen
             name="Apparel"
             component={Apparel}
-            options={{headerShown: false}}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Apparel',
+              tabBarIcon: ({focused, color, size}) => (
+                <Image
+                  source={
+                    focused
+                      ? require('./src/assets/images/apparel-active.png')
+                      : require('./src/assets/images/apparel-not-active.png')
+                  }
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              ),
+            }}
           />
           <Tab.Screen
             name="Notification"
             component={Notifications}
-            options={{headerShown: false}}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Notification',
+              tabBarIcon: ({focused, color, size}) => (
+                <Image
+                  source={
+                    focused
+                      ? require('./src/assets/images/notification-active.png')
+                      : require('./src/assets/images/notification-not-active.png')
+                  }
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              ),
+            }}
           />
           <Tab.Screen
             name="Profile"
             component={Settings}
-            options={{headerShown: false}}
+            options={{
+              headerShown: false,
+              tabBarLabel: 'Profile',
+              tabBarIcon: ({focused, color, size}) => (
+                <Image
+                  source={
+                    focused
+                      ? require('./src/assets/images/profile-active.png')
+                      : require('./src/assets/images/profile-not-active.png')
+                  }
+                  style={{
+                    width: 20,
+                    height: 20,
+                  }}
+                />
+              ),
+            }}
           />
         </Tab.Navigator>
       )}

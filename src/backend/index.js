@@ -40,6 +40,14 @@ const getTheBobBurgers = async () => {
   return res;
 };
 
+const getTheBobBurgersById = async id => {
+  const res = await axios.get(
+    `https://bobsburgers-api.herokuapp.com/characters/${id}`,
+  );
+
+  return res;
+};
+
 const getCurrentUser = async () => {
   const userEmail = await auth.currentUser?.email;
   return userEmail;
@@ -59,4 +67,5 @@ export {
   getTheBobBurgers,
   getCurrentUser,
   getDrinks,
+  getTheBobBurgersById,
 };

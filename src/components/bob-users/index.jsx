@@ -1,7 +1,15 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Image, Text, Button} from 'react-native';
 
-const BobUsers = ({name, occupation, firstEpisode, url, gender}) => {
+const BobUsers = ({
+  name,
+  occupation,
+  firstEpisode,
+  url,
+  gender,
+  navigation,
+  id,
+}) => {
   return (
     <View
       style={{
@@ -22,6 +30,12 @@ const BobUsers = ({name, occupation, firstEpisode, url, gender}) => {
         {' '}
         First Episode: {firstEpisode || 'N/A'}{' '}
       </Text>
+      <Button
+        title="View Details"
+        onPress={() => {
+          navigation.navigate('UserDetails', {id});
+        }}
+      />
     </View>
   );
 };

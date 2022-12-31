@@ -7,41 +7,25 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import BobUsers from '../../components/bob-users';
 import Loading from '../../components/loading';
 import useBobsBurger from '../../hooks/useBobsBurger';
+import AllUsers from './screens/all-users';
+import UserDetails from './screens/user-details';
 
 const Home = ({navigation}) => {
-  const {loading, theBobsBurgers} = useBobsBurger();
+  const Stack = createNativeStackNavigator();
 
   return (
-    <>
-      <ScrollView>
-        {loading ? (
-          <View>
-            <Text style={{fontSize: 30, color: 'black'}}>
-              {' '}
-              Loading content...{' '}
-            </Text>
-          </View>
-        ) : (
-          <>
-            {theBobsBurgers?.data?.map(data => {
-              return (
-                <BobUsers
-                  key={data.id}
-                  name={data.name}
-                  occupation={data.occupation}
-                  firstEpisode={data.firstEpisode}
-                  url={data.image}
-                  gender={data.gender === 'Female'}
-                />
-              );
-            })}
-          </>
-        )}
-      </ScrollView>
-    </>
+    <Stack.Navigator initialRouteName="AllUsers">
+      <Stack.Screen
+        name="AllUsers"
+        component={AllUsers}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen name="UserDetails" component={UserDetails} />
+    </Stack.Navigator>
   );
 };
 

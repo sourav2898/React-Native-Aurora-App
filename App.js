@@ -90,11 +90,11 @@ const App = () => {
             }}
           />
           <Tab.Screen
-            name="Apparel"
+            name="Drinks"
             component={Apparel}
             options={{
               headerShown: false,
-              tabBarLabel: 'Apparel',
+              tabBarLabel: 'Drinks',
               tabBarIcon: ({focused, color, size}) => (
                 <Image
                   source={

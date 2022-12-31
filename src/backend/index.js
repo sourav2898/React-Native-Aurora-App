@@ -45,4 +45,18 @@ const getCurrentUser = async () => {
   return userEmail;
 };
 
-export {handleSignup, handleSignin, getTheBobBurgers, getCurrentUser};
+const getDrinks = async () => {
+  const res = await axios.get(
+    'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita',
+  );
+
+  return res;
+};
+
+export {
+  handleSignup,
+  handleSignin,
+  getTheBobBurgers,
+  getCurrentUser,
+  getDrinks,
+};

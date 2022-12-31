@@ -1,9 +1,21 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Text, View, Image, StyleSheet} from 'react-native';
 import {useBobsBurgerById} from '../../../hooks/useBobsBurger';
 
-const UserDetails = ({route}) => {
+const UserDetails = ({route, navigation}) => {
   const {loading, theBobsBurgersById} = useBobsBurgerById(route.id);
+
+  useEffect(() => {
+    navigation.getParent()?.setOptions({
+      tabBarStyle: {
+        display: 'none',
+      },
+    });
+    return () =>
+      navigation.getParent()?.setOptions({
+        tabBarStyle: undefined,
+      });
+  }, [navigation]);
 
   return (
     <View style={styles.container}>
